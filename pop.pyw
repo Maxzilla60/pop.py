@@ -13,6 +13,7 @@ class Pop(tk.Frame):
         self.getSessionFromFile()
         self.uiSetup()
         self.setDefaultURL()
+        self.updateWindowTitle()
         self.showWindow()
 
     def pop(self):
@@ -38,7 +39,7 @@ class Pop(tk.Frame):
             self.session = sessionFile.readlines()
 
     def setDefaultURL(self):
-        self.updateURL("Click Pop! (or press P)" + " [" + os.path.basename(self.file) + "]")
+        self.updateURL("Click Pop! (or press P)")
 
     def windowSetup(self):
         self.parent.iconbitmap(default='pop.ico')
@@ -76,6 +77,9 @@ class Pop(tk.Frame):
         if self.sessionIsEmpty():
             self.button.config(state=tk.DISABLED)
         self.button.pack(fill=tk.X)
+
+    def updateWindowTitle(self):
+        self.parent.title("Poppin' Random URL - " + self.file)
 
     def updateURL(self, newURL):
         self.url = newURL
