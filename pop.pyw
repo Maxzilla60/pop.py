@@ -117,7 +117,12 @@ class Pop(tk.Frame):
     def showWindow(self):
         self.parent.deiconify()
 
-if __name__ == "__main__":
-    root = tk.Tk()
+root = tk.Tk()
+
+if (sys.version_info < (3, 0)):
+    from tkinter import messagebox
+    root.withdraw()
+    messagebox.showerror("Python 2 detected", "This program requires Python 3 or higher")
+elif __name__ == "__main__":
     Pop(root).pack(side="top", fill="both", expand=True)
     root.mainloop()
