@@ -7,7 +7,8 @@ class Pop(tk.Frame):
     def __init__(self, parent, *args, **kwargs):
         tk.Frame.__init__(self, parent, *args, **kwargs)
         self.parent = parent
-        self.hideWindow()        
+        self.initExceptionCallback()
+        self.hideWindow()
         self.windowSetup()
         self.getFileName()
         self.getSessionFromFile()
@@ -24,6 +25,15 @@ class Pop(tk.Frame):
         webbrowser.open(self.url)
         PlaySound('pop.wav', SND_FILENAME)
         self.updateFileContents()
+
+    def initExceptionCallback(self):
+        self.parent.report_callback_exception = self.report_callback_exception
+
+    def report_callback_exception(self, exc, val, tb):
+        from tkinter import messagebox
+        from string import Template
+        err = Template("$exc\n$tb\n\n$val").safe_substitute(exc=str(exc), val=str(val), tb=str(tb))
+        messagebox.showerror("Whoops, an Exception!", err)
 
     def getFileName(self):
         if len(sys.argv) >= 2:
