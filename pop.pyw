@@ -39,7 +39,7 @@ class Pop(tk.Frame):
         if len(sys.argv) >= 2:
             file = sys.argv[1]
         else:
-            file = filedialog.askopenfilename(initialdir = ".", initialfile="skullspike.txt", title = "Poppin' Random URL - Select session file", filetypes = (("text files","*.txt"),("all files","*.*")))
+            file = filedialog.askopenfilename(initialdir = ".", initialfile="url_list.txt", title = "Pop Random URL - Select session file", filetypes = (("text files","*.txt"),("all files","*.*")))
             if not file:
                 sys.exit()
         self.file = file
@@ -53,7 +53,7 @@ class Pop(tk.Frame):
 
     def windowSetup(self):
         self.parent.iconbitmap(default='pop.ico')
-        self.parent.title("Poppin' Random URL")
+        self.parent.title("Pop Random URL")
         self.parent.bind("<P>", lambda event: self.pop())
         self.parent.bind("<p>", lambda event: self.pop())
         self.parent.bind("<Escape>", lambda event: sys.exit())
@@ -89,7 +89,7 @@ class Pop(tk.Frame):
         self.button.pack(fill=tk.X)
 
     def updateWindowTitle(self):
-        self.parent.title("Poppin' Random URL - " + self.file)
+        self.parent.title("Pop Random URL - " + self.file)
 
     def updateURL(self, newURL):
         self.url = newURL
